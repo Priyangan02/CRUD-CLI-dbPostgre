@@ -57,17 +57,15 @@ def update_data(conn):
 def delete_data(conn):
    cur = conn.cursor()
    show_data(conn)
-   nims = str(input("Pilih NIM Mahasiswa Yang Akan Dihapus: "))
-   slc = "SELECT * FROM mahasiswa WHERE nim= %s"
-   val = (nims)
-   cur.execute(slc, val)
+   nims = input("Pilih NIM Mahasiswa Yang Akan Dihapus: ")
+   sql = "SELECT * FROM mahasiswa WHERE nim='"nims"'"
+   cur.execute(sql)
    con = cur.rowcount
    if (con == 1):
       inp = input("Apakah Anda Ingin Menghapus Data Tersebut? (y/t): ")
       if (inp.upper()=="Y"):
-         sql = "DELETE FROM mahasiswa WHERE nim=%s"
-         val = (nims)
-         cur.execute(sql, val)
+         sql = "DELETE FROM mahasiswa WHERE nim='"nims"'"
+         cur.execute(sql)
          conn.commit()
          print("="*20)
          print("\b{} DATA BERHASIL DIHAPUS".format(cur.rowcount))
